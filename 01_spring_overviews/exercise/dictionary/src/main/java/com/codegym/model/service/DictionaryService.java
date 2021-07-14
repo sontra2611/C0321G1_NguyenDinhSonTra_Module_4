@@ -5,5 +5,5 @@ import com.codegym.model.bean.Dictionary;
 import java.util.List;
 
 public interface DictionaryService {
-    public List<Dictionary> findAll();
+    public String translate(String eng);
 }

@@ -13,8 +13,17 @@ public class DictionaryServiceImlp implements DictionaryService {
     @Autowired
     DictionaryRepository repository;
 
+
     @Override
-    public List<Dictionary> findAll() {
-        return repository.findAll();
+    public String translate(String eng) {
+        List<Dictionary> dictionaryList = repository.findAll();
+        String result = null;
+        for (int i = 0; i < dictionaryList.size(); i++){
+            if ((eng.toLowerCase()).equals(dictionaryList.get(i).getEnglish())){
+                result = dictionaryList.get(i).getVietnamese();
+                return result;
+            }
+        }
+        return result;
     }
 }

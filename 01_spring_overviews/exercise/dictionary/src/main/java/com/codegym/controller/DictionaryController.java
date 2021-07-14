@@ -24,14 +24,8 @@ public class DictionaryController {
 
     @PostMapping("/result")
     public String result(@RequestParam String eng, Model model) {
-        List<Dictionary> dictionaryList = dictionaryService.findAll();
-        for (int i = 0; i < dictionaryList.size(); i++){
-            if ((eng.toLowerCase()).equals(dictionaryList.get(i).getEnglish())){
-                model.addAttribute("vietnamese", dictionaryList.get(i).getVietnamese());
-                model.addAttribute("english", eng);
-                return "result";
-            }
-        }
+        model.addAttribute("english", eng);
+        model.addAttribute("vietnamese", dictionaryService.translate(eng));
         return "result";
     }
 }
