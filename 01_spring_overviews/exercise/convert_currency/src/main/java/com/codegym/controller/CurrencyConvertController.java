@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CurrencyConvertController {
+    @Autowired
+    CurrencyConvertService currencyConvertService;
+
     @GetMapping("/convert")
     public String index() {
         return "index";
     }
 
-    @Autowired
-    CurrencyConvertService currencyConvertService;
     @PostMapping("/result")
     public String result(@RequestParam String usd, String rate, Model model) {
         float result = currencyConvertService.convert(usd,rate);
