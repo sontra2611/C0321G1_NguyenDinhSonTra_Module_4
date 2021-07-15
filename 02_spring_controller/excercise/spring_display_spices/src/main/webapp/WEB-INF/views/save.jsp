@@ -12,11 +12,17 @@
     <title>Title</title>
 </head>
 <body>
-<h2>Các loại gia vị bạn đã chọn là :</h2>
-<ul>
-    <c:forEach items="${spices}" var="spice">
-        <li>${spice}</li>
-    </c:forEach>
-</ul>
+<c:if test="${empty spices}">
+    <h2>Bạn không chọn loại gia vị nào</h2>
+</c:if>
+
+<c:if test="${not empty spices}">
+    <h2>Các loại gia vị bạn đã chọn là : ${message}</h2>
+    <ul>
+        <c:forEach items="${spices}" var="spice">
+            <li>${spice}</li>
+        </c:forEach>
+    </ul>
+</c:if>
 </body>
 </html>

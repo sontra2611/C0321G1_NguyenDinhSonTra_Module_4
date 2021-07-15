@@ -16,7 +16,7 @@ public class SpicesController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.GET)
-    public String save(@RequestParam("spice") String[] spices, Model model) {
+    public String save(@RequestParam(value = "spice", required = false) String[] spices, Model model) {
         model.addAttribute("spices", spices);
         return "save";
     }
