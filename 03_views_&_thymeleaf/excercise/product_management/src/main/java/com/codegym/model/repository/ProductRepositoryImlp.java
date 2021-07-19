@@ -48,7 +48,7 @@ public class ProductRepositoryImlp implements ProductRepository {
         Product product = null;
         Set<Integer> set = productMap.keySet();
         for (Integer key : set) {
-            if ((productMap.get(key).getNameProduct().toLowerCase()).equals(name.toLowerCase())) {
+            if ((productMap.get(key).getNameProduct().toLowerCase()).contains(name.toLowerCase())) {
                 product = productMap.get(key);
                 productList.add(product);
             }
