@@ -1,14 +1,11 @@
-package com.codegym.model.repository.imlp;
+package com.codegym.model.repository.impl;
 
 import com.codegym.model.bean.Product;
 import com.codegym.model.repository.IProductRepository;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import java.util.*;
 
 @Repository

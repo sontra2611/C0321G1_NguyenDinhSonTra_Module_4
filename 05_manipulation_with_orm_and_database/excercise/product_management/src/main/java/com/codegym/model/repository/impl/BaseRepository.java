@@ -1,4 +1,4 @@
-package com.codegym.model.repository.imlp;
+package com.codegym.model.repository.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
