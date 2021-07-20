@@ -1,11 +1,10 @@
-package com.codegym.model.repository.imlp;
+package com.codegym.model.repository.impl;
 
 import com.codegym.model.bean.Customer;
 import com.codegym.model.repository.ICustomerRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository

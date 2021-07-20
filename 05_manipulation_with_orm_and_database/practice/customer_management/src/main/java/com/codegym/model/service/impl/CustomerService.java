@@ -1,4 +1,4 @@
-package com.codegym.model.service.imlp;
+package com.codegym.model.service.impl;
 
 import com.codegym.model.bean.Customer;
 import com.codegym.model.repository.ICustomerRepository;
