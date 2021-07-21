@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+
+<body>
+<h3>Blog List</h3>
+<p>
+    <a th:href="@{/blog/create}">
+        Add new product
+    </a>
+</p>
+
+<div class="notify">
+    <!--/*@thymesVar id="msgSuccess" type="com"*/-->
+    <div th:if="${msgSuccess}">
+        <span style="color: green" th:text="${msgSuccess}"></span>
+    </div>
+</div>
+
+<div style="margin-bottom: 10px">
+    <form th:action="@{/blog/search}" method="POST">
+        <input name="name" placeholder="Enter name blog">
+        <button type="submit">search</button>
+    </form>
+</div>
+
+<table id="blog">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Content</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blog : ${blogList}">
+        <td th:text="${blog.id}"></td>
+        <td th:text="${blog.name}"></td>
+        <td th:text="${blog.content}"></td>
+        <td><a th:href="@{/blog/{id}/edit(id=${blog.id})}">edit</a></td>
+        <td><a th:href="@{/blog/{id}/delete(id=${blog.id})}">delete</a></td>
+        <td><a th:href="@{/blog/{id}/view(id=${blog.id})}">view</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
