@@ -38,4 +38,9 @@ public class BlogService implements IBlogService {
     public Page<Blog> findAllByNameContrains(String name, Pageable pageable) {
         return iBlogRepository.findAllByNameContains(name, pageable);
     }
+
+    @Override
+    public Page<Blog> findAllByCategoryId(Integer id, Pageable page) {
+        return iBlogRepository.findAllByCategory_Id(id, page);
+    }
 }

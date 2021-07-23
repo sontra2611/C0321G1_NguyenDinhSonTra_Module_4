@@ -25,6 +25,15 @@
     </form>
 </div>
 
+<div style="margin-bottom: 10px">
+    <form th:action="@{/blog/searchByIdCategory}" method="POST">
+        <select name="idCategory">
+            <option th:each="category : ${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
+        </select>
+        <button type="submit">search</button>
+    </form>
+</div>
+
 <table border="1px">
     <thead>
     <tr>

@@ -31,6 +31,8 @@ public class BlogController {
     @GetMapping("")
     public String list(@PageableDefault(value = 5, sort = "createStartTime")Pageable pageable, Model model) {
         Page<Blog> blogList = iBlogService.findAll(pageable);
+        List<Category> categoryList = iCategoryService.findAll();
+        model.addAttribute("categoryList", categoryList);
         model.addAttribute("blogList", blogList);
         return "blog/list";
     }
@@ -89,6 +91,17 @@ public class BlogController {
     @PostMapping("/search")
     public String search(@RequestParam String name,Pageable pageable, Model model) {
         Page<Blog> blogList = iBlogService.findAllByNameContrains(name,pageable);
+        List<Category> categoryList = iCategoryService.findAll();
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("blogList", blogList);
+        return "blog/list";
+    }
+
+    @PostMapping("/searchByIdCategory")
+    public String searchBlogByIdCategory(@RequestParam Integer idCategory,Pageable pageable, Model model) {
+        Page<Blog> blogList = iBlogService.findAllByCategoryId(idCategory, pageable);
+        List<Category> categoryList = iCategoryService.findAll();
+        model.addAttribute("categoryList", categoryList);
         model.addAttribute("blogList", blogList);
         return "blog/list";
     }
