@@ -87,8 +87,8 @@ public class BlogController {
     }
 
     @PostMapping("/search")
-    public String search(@RequestParam String name, Model model) {
-        List<Blog> blogList = iBlogService.findByName(name);
+    public String search(@RequestParam String name,Pageable pageable, Model model) {
+        Page<Blog> blogList = iBlogService.findAllByNameContrains(name,pageable);
         model.addAttribute("blogList", blogList);
         return "blog/list";
     }

@@ -15,5 +15,5 @@ public interface IBlogService {
 
     void delete(Integer id);
 
-    List<Blog> findByName(String name);
+    Page<Blog> findAllByNameContrains(String name,Pageable pageable);
 }
