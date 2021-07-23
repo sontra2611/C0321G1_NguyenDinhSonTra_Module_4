@@ -21,6 +21,10 @@
             <input type="text" th:field="*{content}"/>
         </div>
         <div>
+            <label>Create start time</label>
+            <input type="text" th:field="*{createStartTime}" readonly/>
+        </div>
+        <div>
             <label>Category</label>
             <select th:field = "*{category.id}">
                 <option th:each="items : ${categoryList}" th:text="${items.name}" th:value="${items.id}"></option>

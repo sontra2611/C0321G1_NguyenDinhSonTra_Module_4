@@ -28,6 +28,7 @@
 <table border="1px">
     <thead>
     <tr>
+        <th>No</th>
         <th>id</th>
         <th>Name</th>
         <th>Content</th>
@@ -39,7 +40,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="blog : ${blogList}">
+    <tr th:each="blog,index : ${blogList}">
+        <td th:text="${index.count}"></td>
         <td th:text="${blog.id}"></td>
         <td th:text="${blog.name}"></td>
         <td th:text="${blog.content}"></td>

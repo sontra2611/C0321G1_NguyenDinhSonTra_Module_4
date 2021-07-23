@@ -14,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -41,9 +43,10 @@ public class BlogController {
         return "blog/create";
     }
 
-    @PostMapping({"/save","/update"})
+    @PostMapping("/save")
     public String save(Blog blog, RedirectAttributes redirectAttributes) {
-        blog.setCreateStartTime(LocalDateTime.now());
+        String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").format(new Date(System.currentTimeMillis()));
+        blog.setCreateStartTime(time);
         iBlogService.save(blog);
         redirectAttributes.addFlashAttribute("msgSuccess", "Added new blog have successfully");
         return "redirect:/blog";
@@ -55,6 +58,13 @@ public class BlogController {
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("blog", iBlogService.findById(id));
         return "blog/edit";
+    }
+
+    @PostMapping("/update")
+    public String update(Blog blog, RedirectAttributes redirectAttributes) {
+        iBlogService.save(blog);
+        redirectAttributes.addFlashAttribute("msgSuccess", "Added new blog have successfully");
+        return "redirect:/blog";
     }
 
     @GetMapping("/{id}/delete")

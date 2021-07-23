@@ -21,14 +21,16 @@
 <table border="1px">
     <thead>
     <tr>
-        <th>id</th>
+        <th>No</th>
+        <th>Id</th>
         <th>Name</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="category : ${categories}">
+    <tr th:each="category,index : ${categories}">
+        <td th:text="${index.count}"></td>
         <td th:text="${category.id}"></td>
         <td th:text="${category.name}"></td>
         <td><a th:href="@{/category/{id}/edit(id=${category.id})}">edit</a></td>

@@ -11,7 +11,8 @@ public class Blog {
     private Integer id;
     private String name;
     private String content;
-    private LocalDateTime createStartTime;
+    @Column(name = "create_start_time", columnDefinition = "DATETIME")
+    private String createStartTime;
 
     @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name = "id_category", referencedColumnName = "id")
@@ -20,7 +21,7 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(Integer id, String name, String content, LocalDateTime createStartTime, Category category) {
+    public Blog(Integer id, String name, String content, String createStartTime, Category category) {
         this.id = id;
         this.name = name;
         this.content = content;
@@ -52,11 +53,11 @@ public class Blog {
         this.content = content;
     }
 
-    public LocalDateTime getCreateStartTime() {
+    public String getCreateStartTime() {
         return createStartTime;
     }
 
-    public void setCreateStartTime(LocalDateTime createStartTime) {
+    public void setCreateStartTime(String createStartTime) {
         this.createStartTime = createStartTime;
     }
 
