@@ -18,4 +18,6 @@ public interface IBlogService {
     Page<Blog> findAllByNameContrains(String name,Pageable pageable);
 
     Page<Blog> findAllByCategoryId(Integer id, Pageable page);
+
+    List<Blog> findAllByCategory_Id(Integer id);
 }

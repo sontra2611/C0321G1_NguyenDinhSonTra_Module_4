@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/blog")
@@ -28,9 +29,28 @@ public class BlogController {
     @Autowired
     ICategoryService iCategoryService;
 
-    @GetMapping("")
-    public String list(@PageableDefault(value = 5, sort = "createStartTime")Pageable pageable, Model model) {
-        Page<Blog> blogList = iBlogService.findAll(pageable);
+    @GetMapping({"","/list"})
+    public String list(@PageableDefault(value = 5, sort = "createStartTime")Pageable pageable,
+                       @RequestParam Optional<String> name,@RequestParam Optional<Integer> idCategory, Model model) {
+        String keywordValue = "";
+        Integer idCategoryValue = null;
+        Page<Blog> blogList = null;
+        if (name.isPresent()) {
+            keywordValue = name.get();
+            blogList = iBlogService.findAllByNameContrains(keywordValue,pageable);
+        }
+
+        if (idCategory.isPresent()){
+            idCategoryValue = idCategory.get();
+            blogList = iBlogService.findAllByCategoryId(idCategoryValue, pageable);
+        }
+
+        if ((!name.isPresent()) && (!idCategory.isPresent())){
+            blogList = iBlogService.findAll(pageable);
+        }
+
+        model.addAttribute("keywordValue", keywordValue);
+        model.addAttribute("idCategoryValue", idCategoryValue);
         List<Category> categoryList = iCategoryService.findAll();
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("blogList", blogList);
@@ -88,16 +108,7 @@ public class BlogController {
         return "blog/view";
     }
 
-    @PostMapping("/search")
-    public String search(@RequestParam String name,Pageable pageable, Model model) {
-        Page<Blog> blogList = iBlogService.findAllByNameContrains(name,pageable);
-        List<Category> categoryList = iCategoryService.findAll();
-        model.addAttribute("categoryList", categoryList);
-        model.addAttribute("blogList", blogList);
-        return "blog/list";
-    }
-
-    @PostMapping("/searchByIdCategory")
+    @GetMapping("/searchByIdCategory")
     public String searchBlogByIdCategory(@RequestParam Integer idCategory,Pageable pageable, Model model) {
         Page<Blog> blogList = iBlogService.findAllByCategoryId(idCategory, pageable);
         List<Category> categoryList = iCategoryService.findAll();

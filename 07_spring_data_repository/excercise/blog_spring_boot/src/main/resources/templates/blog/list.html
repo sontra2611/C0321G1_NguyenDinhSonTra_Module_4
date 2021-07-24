@@ -19,14 +19,14 @@
 </div>
 
 <div style="margin-bottom: 10px">
-    <form th:action="@{/blog/search}" method="POST">
+    <form th:action="@{/blog/list}">
         <input name="name" placeholder="Enter name blog">
         <button type="submit">search</button>
     </form>
 </div>
 
 <div style="margin-bottom: 10px">
-    <form th:action="@{/blog/searchByIdCategory}" method="POST">
+    <form th:action="@{/blog/list}">
         <select name="idCategory">
             <option th:each="category : ${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
         </select>
@@ -64,9 +64,9 @@
 </table>
 
 <div>
-    <a th:href="@{'/blog'(page=${blogList.number - 1})}" th:if="${blogList.hasPrevious()}">Previous</a>
+    <a th:href="@{'/blog'(page=${blogList.number - 1}, name=${keywordValue}, idCategory = ${idCategoryValue})}" th:if="${blogList.hasPrevious()}">Previous</a>
     <span th:text="${blogList.number + 1}"></span>/<span th:text="${blogList.totalPages}"></span>
-    <a th:href="@{'/blog'(page=${blogList.number + 1})}" th:if="${blogList.hasNext()}">Next</a>
+    <a th:href="@{'/blog'(page=${blogList.number + 1}, name=${keywordValue}, idCategory = ${idCategoryValue})}" th:if="${blogList.hasNext()}">Next</a>
 </div>
 </body>
 </html>

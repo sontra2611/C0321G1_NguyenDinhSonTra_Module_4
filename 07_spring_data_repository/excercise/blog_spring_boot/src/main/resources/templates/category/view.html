@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<h3>View Blog</h3>
+<p>
+    <a th:href="@{/category}">
+        Back to category list
+    </a>
+</p>
+<div id="detail">
+    <p><span>Các bài viết có danh mục </span> <span style="font-weight: bold" th:text="${category.name}"></span> là :</p>
+    <ul>
+        <li th:each="blog : ${blogList}" th:text="${blog.name}"></li>
+    </ul>
+</div>
+</body>
+</html>

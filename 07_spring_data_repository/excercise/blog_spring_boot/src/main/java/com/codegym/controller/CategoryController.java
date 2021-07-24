@@ -2,6 +2,7 @@ package com.codegym.controller;
 
 import com.codegym.model.bean.Blog;
 import com.codegym.model.bean.Category;
+import com.codegym.model.service.blog.IBlogService;
 import com.codegym.model.service.category.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CategoryController {
     @Autowired
     ICategoryService iCategoryService;
+
+    @Autowired
+    IBlogService iBlogService;
 
     @GetMapping("")
     public String list(@PageableDefault(value = 5) Pageable pageable, Model model) {
@@ -61,4 +65,10 @@ public class CategoryController {
         return "redirect:/category";
     }
 
+    @GetMapping("/{id}/view")
+    public String view(@PathVariable int id, Model model) {
+        model.addAttribute("blogList", iBlogService.findAllByCategory_Id(id));
+        model.addAttribute("category", iCategoryService.findById(id));
+        return "category/view";
+    }
 }
