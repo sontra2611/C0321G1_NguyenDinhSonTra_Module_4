@@ -29,23 +29,19 @@ public class BlogController {
     @Autowired
     ICategoryService iCategoryService;
 
-    @GetMapping({"","/list"})
-    public String list(@PageableDefault(value = 5, sort = "createStartTime")Pageable pageable,
-                       @RequestParam Optional<String> name,@RequestParam Optional<Integer> idCategory, Model model) {
+    @GetMapping({"", "/list"})
+    public String list(@PageableDefault(value = 5, sort = "createStartTime") Pageable pageable,
+                       @RequestParam Optional<String> name, @RequestParam Optional<Integer> idCategory, Model model) {
         String keywordValue = "";
         Integer idCategoryValue = null;
         Page<Blog> blogList = null;
-        if (name.isPresent()) {
-            keywordValue = name.get();
-            blogList = iBlogService.findAllByNameContrains(keywordValue,pageable);
-        }
-
-        if (idCategory.isPresent()){
+        if (idCategory.isPresent()) {
             idCategoryValue = idCategory.get();
             blogList = iBlogService.findAllByCategoryId(idCategoryValue, pageable);
-        }
-
-        if ((!name.isPresent()) && (!idCategory.isPresent())){
+        } else if (name.isPresent()) {
+            keywordValue = name.get();
+            blogList = iBlogService.findAllByNameContrains(keywordValue, pageable);
+        } else {
             blogList = iBlogService.findAll(pageable);
         }
 
@@ -107,5 +103,5 @@ public class BlogController {
         model.addAttribute("blog", iBlogService.findById(id));
         return "blog/view";
     }
-    
+
 }
