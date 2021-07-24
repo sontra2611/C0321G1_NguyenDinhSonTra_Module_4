@@ -107,13 +107,5 @@ public class BlogController {
         model.addAttribute("blog", iBlogService.findById(id));
         return "blog/view";
     }
-
-    @GetMapping("/searchByIdCategory")
-    public String searchBlogByIdCategory(@RequestParam Integer idCategory,Pageable pageable, Model model) {
-        Page<Blog> blogList = iBlogService.findAllByCategoryId(idCategory, pageable);
-        List<Category> categoryList = iCategoryService.findAll();
-        model.addAttribute("categoryList", categoryList);
-        model.addAttribute("blogList", blogList);
-        return "blog/list";
-    }
+    
 }
