@@ -8,11 +8,39 @@
         Back to category list
     </a>
 </p>
-<div id="detail">
-    <p><span>Các bài viết có danh mục </span> <span style="font-weight: bold" th:text="${category.name}"></span> là :</p>
-    <ul>
-        <li th:each="blog : ${blogList}" th:text="${blog.name}"></li>
-    </ul>
+<table border="1px">
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>id</th>
+        <th>Name</th>
+        <th>Content</th>
+        <th>Category</th>
+        <th>Create start time</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blog,index : ${blogList}">
+        <td th:text="${index.count}"></td>
+        <td th:text="${blog.id}"></td>
+        <td th:text="${blog.name}"></td>
+        <td th:text="${blog.content}"></td>
+        <td th:text="${blog.category.name}"></td>
+        <td th:text="${blog.createStartTime}"></td>
+        <td><a th:href="@{/blog/{id}/edit(id=${blog.id})}">edit</a></td>
+        <td><a th:href="@{/blog/{id}/delete(id=${blog.id})}">delete</a></td>
+        <td><a th:href="@{/blog/{id}/view(id=${blog.id})}">view</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <a th:href="@{'/category/{id}/view'(page=${blogList.number - 1}, id = ${idCategory})}" th:if="${blogList.hasPrevious()}">Previous</a>
+    <span th:text="${blogList.number + 1}"></span>/<span th:text="${blogList.totalPages}"></span>
+    <a th:href="@{'/category/{id}/view'(page=${blogList.number + 1}, id = ${idCategory})}" th:if="${blogList.hasNext()}">Next</a>
 </div>
 </body>
 </html>

@@ -66,8 +66,9 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}/view")
-    public String view(@PathVariable int id, Model model) {
-        model.addAttribute("blogList", iBlogService.findAllByCategory_Id(id));
+    public String view(@PageableDefault(value = 5, sort = "createStartTime") Pageable pageable, @PathVariable int id, Model model) {
+        model.addAttribute("idCategory", id);
+        model.addAttribute("blogList", iBlogService.findAllByCategoryId(id,pageable));
         model.addAttribute("category", iCategoryService.findById(id));
         return "category/view";
     }
