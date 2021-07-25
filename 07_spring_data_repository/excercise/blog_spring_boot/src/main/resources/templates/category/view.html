@@ -17,9 +17,6 @@
         <th>Content</th>
         <th>Category</th>
         <th>Create start time</th>
-        <th>Edit</th>
-        <th>Delete</th>
-        <th>View</th>
     </tr>
     </thead>
     <tbody>
@@ -30,9 +27,6 @@
         <td th:text="${blog.content}"></td>
         <td th:text="${blog.category.name}"></td>
         <td th:text="${blog.createStartTime}"></td>
-        <td><a th:href="@{/blog/{id}/edit(id=${blog.id})}">edit</a></td>
-        <td><a th:href="@{/blog/{id}/delete(id=${blog.id})}">delete</a></td>
-        <td><a th:href="@{/blog/{id}/view(id=${blog.id})}">view</a></td>
     </tr>
     </tbody>
 </table>
