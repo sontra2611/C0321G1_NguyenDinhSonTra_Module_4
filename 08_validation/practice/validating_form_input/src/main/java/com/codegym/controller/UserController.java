@@ -1,6 +1,6 @@
 package com.codegym.controller;
 
-import com.codegym.model.User;
+import com.codegym.model.bean.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -25,5 +25,4 @@ public class UserController {
         }
         return new ModelAndView("/result");
     }
-
 }

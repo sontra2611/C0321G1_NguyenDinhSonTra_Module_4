@@ -1,4 +1,4 @@
-package com.codegym.model;
+package com.codegym.model.bean;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;

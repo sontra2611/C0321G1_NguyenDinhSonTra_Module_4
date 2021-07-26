@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Bạn đã đăng ký thành công với các thông tin sau :</h2>
+<p>First name : <span th:text="${user.firstName}"></span></p>
+<p>Last name : <span th:text="${user.lastName}"></span></p>
+<p>Phone : <span th:text="${user.phone}"></span></p>
+<p>Age : <span th:text="${user.age}"></span></p>
+<p>Email : <span th:text="${user.email}"></span></p>
+</body>
+</html>
