@@ -3,6 +3,7 @@ package com.codegym.logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 
 
@@ -17,8 +18,9 @@ public class Logger {
 
     @After("addAllMethodsPointcut()")
     public void callAllMethod(JoinPoint joinPoint) {
-        count ++;
-        System.err.println("time : " + LocalDate.now() + " -" + " method : " + joinPoint.getSignature().getName() +
+        count++;
+        System.err.println("time : " + LocalDate.now() + " -" +
+                " method : " + joinPoint.getSignature().getName() +
                 " -" + " so luong truy cap : " + count);
     }
 
@@ -27,7 +29,7 @@ public class Logger {
     }
 
     @AfterReturning("borrowPointcut()")
-    public void callAfterBorrow(JoinPoint joinPoint){
+    public void callAfterBorrow(JoinPoint joinPoint) {
         System.err.println("class name: " + joinPoint.getSignature().getDeclaringTypeName() +
                 " -" + " method : " + joinPoint.getSignature().getName() +
                 " -" + " time: " + LocalDate.now());
@@ -38,7 +40,7 @@ public class Logger {
     }
 
     @AfterReturning("giveBookBackPointcut()")
-    public void callAfterGiveBack(JoinPoint joinPoint){
+    public void callAfterGiveBack(JoinPoint joinPoint) {
         System.err.println("class name: " + joinPoint.getSignature().getDeclaringTypeName() +
                 " -" + " method : " + joinPoint.getSignature().getName() +
                 " -" + " time: " + LocalDate.now());
