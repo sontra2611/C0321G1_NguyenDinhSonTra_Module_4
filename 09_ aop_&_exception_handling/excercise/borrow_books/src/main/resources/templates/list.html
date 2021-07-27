@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Borrow Books</h1>
+
+<p>
+<a th:href="@{/book/giveBookBack}">Give Book Back</a>
+</p>
+
+<table border="1px">
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>id</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Quantity</th>
+        <th>Detail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book,index : ${bookList}">
+        <td th:text="${index.count}"></td>
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.quantity}"></td>
+        <td><a th:href="@{/book/view/{id}(id=${book.id})}">detail</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

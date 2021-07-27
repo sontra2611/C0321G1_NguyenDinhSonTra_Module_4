@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<h3>Give Book Back</h3>
+
+<form th:action="@{/book/giveBookBack}" method="post">
+    <input name="idBook" placeholder="input id book">
+    <input type="submit" value="Give Book Back">
+</form>
+
+</body>
+</html>
