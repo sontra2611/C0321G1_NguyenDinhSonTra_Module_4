@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+<p>
+    <a href="/shop">Shop</a>
+</p>
+<h1>Your Cart</h1>
+<h3>Total Items: <span th:text="${cart.countItemQuantity()}"></span></h3>
+<h3>Total Products: <span th:text="${cart.countProductQuantity()}"></span></h3>
+<div style="margin-top: 10px" th:each="product: ${cart.products}">
+    <div><img th:src="${product.key.img}"></div>
+    <div th:text="${product.key.id}"></div>
+    <div th:text="${product.key.name}"></div>
+    <div th:text="${product.key.price}"></div>
+    <div th:text="${product.key.description}"></div>
+
+    <a th:href="@{/changeQuantity/__${product.getKey().id}__(action='-')}"> - </a>
+    <span th:text="${product.getValue()}"></span>
+    <a th:href="@{/changeQuantity/__${product.getKey().id}__(action='+')}"> + </a>
+    <p><a th:href="@{/remove/__${product.getKey().id}__}">Xoá khỏi giỏ hàng</a></p>
+</div>
+
+<div>
+    <p>Total</p>
+    <p th:text="${cart.countTotalPayment()}"></p>
+</div>
+</body>
+</html>

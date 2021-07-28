@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<div>
+    <a href="/shopping-cart">Your cart</a>
+</div>
+
+<p style="color: red" th:text="${message}"></p>
+
+<table border="1px" style="width: 100%">
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td>
+            <img th:src="${product.img}">
+        </td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.description}"></td>
+        <td><a th:href="@{/view/{id}(id = ${product.id})}">Detail</a></td>
+    </tr>
+</table>
+</body>
+</html>
