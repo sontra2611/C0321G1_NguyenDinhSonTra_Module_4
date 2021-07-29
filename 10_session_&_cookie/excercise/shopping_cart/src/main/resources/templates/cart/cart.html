@@ -16,24 +16,30 @@
     <a href="/shop">Shop</a>
 </p>
 <h1>Your Cart</h1>
-<h3>Total Items: <span th:text="${cart.countItemQuantity()}"></span></h3>
-<h3>Total Products: <span th:text="${cart.countProductQuantity()}"></span></h3>
-<div style="margin-top: 10px" th:each="product: ${cart.products}">
-    <div><img th:src="${product.key.img}"></div>
-    <div th:text="${product.key.id}"></div>
-    <div th:text="${product.key.name}"></div>
-    <div th:text="${product.key.price}"></div>
-    <div th:text="${product.key.description}"></div>
 
-    <a th:href="@{/changeQuantity/__${product.getKey().id}__(action='-')}"> - </a>
-    <span th:text="${product.getValue()}"></span>
-    <a th:href="@{/changeQuantity/__${product.getKey().id}__(action='+')}"> + </a>
-    <p><a th:href="@{/remove/__${product.getKey().id}__}">Xoá khỏi giỏ hàng</a></p>
-</div>
+<h2 th:if="${cart == null}">Bạn chưa có sản phẩm nào. Vui lòng vào shop thêm sản phẩm
+    bạn muốn mua </h2>
 
-<div>
-    <p>Total</p>
-    <p th:text="${cart.countTotalPayment()}"></p>
+<div th:if="${cart != null}">
+    <h3>Total Items: <span th:text="${cart.countItemQuantity()}"></span></h3>
+    <h3>Total Products: <span th:text="${cart.countProductQuantity()}"></span></h3>
+    <div style="margin-top: 10px" th:each="product: ${cart.products}">
+        <div><img th:src="${product.key.img}"></div>
+        <div th:text="${product.key.id}"></div>
+        <div th:text="${product.key.name}"></div>
+        <div th:text="${product.key.price}"></div>
+        <div th:text="${product.key.description}"></div>
+
+        <a th:href="@{/changeQuantity/__${product.getKey().id}__(action='-')}"> - </a>
+        <span th:text="${product.getValue()}"></span>
+        <a th:href="@{/changeQuantity/__${product.getKey().id}__(action='+')}"> + </a>
+        <p><a th:href="@{/remove/__${product.getKey().id}__}">Xoá khỏi giỏ hàng</a></p>
+    </div>
+
+    <div>
+        <p>Total</p>
+        <p th:text="${cart.countTotalPayment()}"></p>
+    </div>
 </div>
 </body>
 </html>
