@@ -36,12 +36,12 @@ public class BlogController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Blog> viewBlogById(@PathVariable int id) {
-        Blog blog = iBlogService.findById(id);
-        if (blog == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Blog> viewBlogById(@PathVariable Integer id) {
+        Optional<Blog> blog = iBlogService.findById(id);
+        if (!blog.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(blog, HttpStatus.OK);
+        return new ResponseEntity<>(blog.get(), HttpStatus.OK);
     }
 
 }

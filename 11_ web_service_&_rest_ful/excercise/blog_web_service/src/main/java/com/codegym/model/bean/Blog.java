@@ -1,20 +1,23 @@
 package com.codegym.model.bean;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Blog {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String content;
     @Column(name = "create_start_time", columnDefinition = "DATETIME")
     private String createStartTime;
 
-    @JsonManagedReference
     @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name = "id_category", referencedColumnName = "id")
     private Category category;
