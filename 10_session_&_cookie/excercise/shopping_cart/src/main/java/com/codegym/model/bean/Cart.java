@@ -58,6 +58,10 @@ public class Cart {
         } else {
             newQuantity = itemEntry.getValue() - 1;
         }
+        
+        if (newQuantity == 0){
+            removeProduct(product);
+        }
         products.replace(itemEntry.getKey(), newQuantity);
     }
 
