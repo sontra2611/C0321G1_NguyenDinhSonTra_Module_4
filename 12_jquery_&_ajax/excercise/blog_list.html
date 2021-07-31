@@ -89,6 +89,13 @@
                     if (data === undefined || !data.length) {
                         $('#notFound').css("display", "block");
                     } else {
+                        let content = '    <tr>\n' +
+                            '        <th>Id</th>\n' +
+                            '        <th>Name</th>\n' +
+                            '        <th>Content</th>\n' +
+                            '        <th>Create start time</th>\n' +
+                            '        <th>Category</th>\n' +
+                            '    </tr>';
                         $('#notFound').css("display", "none");
                         let tr = [];
                         for (let i = 0; i < data.length; i++) {
@@ -100,7 +107,8 @@
                             tr.push('<td>' + data[i].category.name + '</td>')
                             tr.push('</tr>');
                         }
-                        $('table').append($(tr.join('')));
+                        content += tr.join('')
+                        $('table').append(content);
                     }
                 }
             })
