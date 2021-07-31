@@ -74,12 +74,13 @@
         })
 
         $('#search').click(function () {
+            page = 0;
             let value = $('#searchName').val();
-           
+
             $('table').empty();
 
             $.ajax({
-                url: "http://localhost:8080/blog?page=0" + "&searchName=" + value,
+                url: "http://localhost:8080/blog?page=" + page + "&searchName=" + value,
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
