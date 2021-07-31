@@ -89,6 +89,8 @@
                     if (data === undefined || !data.length) {
                         $('#notFound').css("display", "block");
                     } else {
+                        $('#notFound').css("display", "none");
+                        
                         let content = '    <tr>\n' +
                             '        <th>Id</th>\n' +
                             '        <th>Name</th>\n' +
@@ -96,7 +98,7 @@
                             '        <th>Create start time</th>\n' +
                             '        <th>Category</th>\n' +
                             '    </tr>';
-                        $('#notFound').css("display", "none");
+
                         let tr = [];
                         for (let i = 0; i < data.length; i++) {
                             tr.push('<tr>');
