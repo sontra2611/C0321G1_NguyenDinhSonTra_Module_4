@@ -21,17 +21,13 @@ public class BlogRestController {
     IBlogService iBlogService;
 
     @GetMapping
-    public ResponseEntity<Page<Blog>> getListBlog(@PageableDefault(value = 2) Pageable pageable) {
-        Page<Blog> blogList = iBlogService.findAll(pageable);
-        if (blogList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Page<Blog>> getListBlog(@PageableDefault(value = 2) Pageable pageable, @RequestParam String searchName) {
+        Page<Blog> blogList = null;
+        String nameValue = "";
+        if (!searchName.isEmpty()) {
+            nameValue = searchName;
         }
-        return new ResponseEntity<>(blogList, HttpStatus.OK);
-    }
-
-    @GetMapping("/search")
-    public ResponseEntity<List<Blog>> searchName(@RequestParam String searchName) {
-        List<Blog> blogList = iBlogService.findByName(searchName);
+        blogList = iBlogService.findByName(pageable, nameValue);
         if (blogList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

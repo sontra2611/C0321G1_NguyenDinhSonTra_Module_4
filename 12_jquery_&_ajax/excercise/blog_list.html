@@ -6,6 +6,7 @@
 </head>
 <body>
 <input id="searchName" placeholder="Enter blog name">
+<input type="button" id="search" value="search">
 <h3 id="notFound" style="display: none">Không tìm thấy</h3>
 <table id="blogList" border="1px">
     <thead>
@@ -30,7 +31,7 @@
     let page = 0;
     $(document).ready(function () {
         $.ajax({
-            url: "http://localhost:8080/blog?page=" + page,
+            url: "http://localhost:8080/blog?page=" + page + "&searchName=" + $('#searchName').val(),
             type: "GET",
             dataType: "json",
             success: function (data) {
@@ -52,7 +53,7 @@
             page++;
             // console.log(page)
             $.ajax({
-                url: "http://localhost:8080/blog?page=" + page,
+                url: "http://localhost:8080/blog?page=" + page + "&searchName=" + $('#searchName').val(),
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
@@ -72,25 +73,21 @@
             })
         })
 
-        $('#searchName').keyup(function () {
-            let value = $(this).val();
+        $('#search').click(function () {
+            let value = $('#searchName').val();
+           
             $('table').empty();
-            if (typeof data === "undefined" || !data.length) {
-                $('#notFound').css("display", "block")
-            } else {
-
-            }
 
             $.ajax({
-                url: "http://localhost:8080/blog/search?searchName=" + value,
+                url: "http://localhost:8080/blog?page=0" + "&searchName=" + value,
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
-                    if (data === undefined || !data.length) {
+                    if (typeof data.content === undefined || !data.content.length) {
                         $('#notFound').css("display", "block");
                     } else {
                         $('#notFound').css("display", "none");
-                        
+
                         let content = '    <tr>\n' +
                             '        <th>Id</th>\n' +
                             '        <th>Name</th>\n' +
@@ -100,13 +97,13 @@
                             '    </tr>';
 
                         let tr = [];
-                        for (let i = 0; i < data.length; i++) {
+                        for (let i = 0; i < data.content.length; i++) {
                             tr.push('<tr>');
-                            tr.push('<td>' + data[i].id + '</td>');
-                            tr.push('<td>' + data[i].name + '</td>');
-                            tr.push('<td>' + data[i].content + '</td>');
-                            tr.push('<td>' + data[i].createStartTime + '</td>');
-                            tr.push('<td>' + data[i].category.name + '</td>')
+                            tr.push('<td>' + data.content[i].id + '</td>');
+                            tr.push('<td>' + data.content[i].name + '</td>');
+                            tr.push('<td>' + data.content[i].content + '</td>');
+                            tr.push('<td>' + data.content[i].createStartTime + '</td>');
+                            tr.push('<td>' + data.content[i].category.name + '</td>')
                             tr.push('</tr>');
                         }
                         content += tr.join('')

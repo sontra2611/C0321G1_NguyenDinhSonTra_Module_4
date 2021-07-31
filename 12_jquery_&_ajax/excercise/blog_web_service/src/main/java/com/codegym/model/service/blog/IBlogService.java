@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface IBlogService {
     Page<Blog> findAll(Pageable pageable);
 
-    List<Blog> findByName(String name);
+    Page<Blog> findByName(Pageable pageable, String name);
 }
