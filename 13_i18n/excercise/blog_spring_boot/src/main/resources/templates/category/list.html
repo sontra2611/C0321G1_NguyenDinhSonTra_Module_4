@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+
+<body>
+<h3 th:text="#{category.header}"></h3>
+<p>
+    <a th:href="@{/category/create}" th:text="#{category.create}"></a>
+</p>
+
+<div class="notify">
+    <!--/*@thymesVar id="msgSuccess" type="com"*/-->
+    <div th:if="${msgSuccess}">
+        <span style="color: green" th:text="${msgSuccess}"></span>
+    </div>
+</div>
+
+<table border="1px">
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>Id</th>
+        <th th:text="#{name}"></th>
+        <th th:text="#{blog.edit}"></th>
+        <th th:text="#{blog.delete}"></th>
+        <th th:text="#{blog.view}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category,index : ${categories}">
+        <td th:text="${index.count}"></td>
+        <td th:text="${category.id}"></td>
+        <td th:text="${category.name}"></td>
+        <td><a th:href="@{/category/{id}/edit(id=${category.id})}" th:text="#{blog.edit}"></a></td>
+        <td><a th:href="@{/category/{id}/delete(id=${category.id})}" th:text="#{blog.delete}"></a></td>
+        <td><a th:href="@{/category/{id}/view(id=${category.id})}" th:text="#{blog.view}"></a></td>
+    </tr>
+    </tbody>
+</table>
+
+<div style="margin-top: 10px">
+    Language: <a href="?lang=en">English</a> | <a href="?lang=fr">French</a>
+</div>
+</body>
+</html>

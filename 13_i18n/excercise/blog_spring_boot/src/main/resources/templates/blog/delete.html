@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<h3 th:text="#{blog.delete}"></h3>
+<p>
+    <a th:href="@{/blog}" th:text="#{blog.back}"></a>
+</p>
+<div id="form">
+    <form action="#" th:action="@{/blog/delete}" th:object="${blog}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label th:text="#{name}"></label>
+            <input type="text" th:field="*{name}" readonly/>
+        </div>
+        <div>
+            <label  th:text="#{content}"></label>
+            <input type="text" th:field="*{content}" readonly/>
+        </div>
+        <div>
+            <label th:text="#{starTime}"></label>
+            <input type="text" th:field="*{createStartTime}" readonly/>
+        </div>
+        <div>
+            <label th:text="#{category}"></label>
+            <input type="text" th:field="*{category.name}" readonly/>
+        </div>
+        <input type="submit" th:value="#{blog.delete}"/>
+    </form>
+</div>
+</body>
+</html>
