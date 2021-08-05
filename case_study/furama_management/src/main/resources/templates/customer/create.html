@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/layout :: head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{layout/layout :: header}"></div>
+
+<div class="container-fluid mt-2">
+    <h2>ADD New Customer</h2>
+    <form th:object="${customerDto}" action="/customer/create" method="post">
+        <div>
+            <div class="form-group">
+                <label>Customer code :</label>
+                <input class="form-control" type="text" name="code" aria-describedby="code" style="width: 80%"
+                       th:field="*{customerCode}">
+                <p class="text-danger" th:errors="*{customerCode}"></p>
+
+                <label for="customerType" class="mt-2">Customer Type :</label>
+                <select class="form-control" id="customerType" th:field="*{customerType}" style="width: 80%">
+                    <option th:each="customerType : ${customerTypeList}"
+                            th:text="${customerType.customerTypeName}"
+                            th:value="${customerType.customerTypeId}"></option>
+                </select>
+
+                <label class="mt-2">name :</label>
+                <input class="form-control" type="text" name="name" style="width: 80%" th:field="*{customerName}">
+                <p class="text-danger" th:errors="*{customerName}"></p>
+
+                <label class="mt-2">Birthday :</label>
+                <input class="form-control" type="date" name="birthday" style="width: 80%"
+                       th:field="*{customerBirthday}">
+
+                <label for="gender">Gender</label>
+                <select th:field="*{customerGender}" class="form-control" id="gender" name="gender" style="width: 80%">
+                    <option th:value="0">Male</option>
+                    <option th:value="1">Female</option>
+                    <option th:value="2">LGBT</option>
+                </select>
+
+                <label class="mt-2">Id Card :</label>
+                <input class="form-control" type="text" name="idCard" aria-describedby="idCard" style="width: 80%"
+                       th:field="*{customerIdCard}">
+                <p class="text-danger" th:errors="*{customerIdCard}"></p>
+
+                <label class="mt-2">Phone :</label>
+                <input class="form-control" type="text" name="phone" aria-describedby="phone" style="width: 80%"
+                       th:field="*{customerPhone}">
+                <p class="text-danger" th:errors="*{customerPhone}"></p>
+
+                <label class="mt-2">Email :</label>
+                <input class="form-control" type="text" name="email" aria-describedby="email" style="width: 80%"
+                       th:field="*{customerEmail}">
+                <p class="text-danger" th:errors="*{customerEmail}"></p>
+
+                <label class="mt-2">Address :</label>
+                <input class="form-control" type="text" name="address" style="width: 80%" th:field="*{customerAddress}">
+                <p class="text-danger" th:errors="*{customerAddress}"></p>
+            </div>
+        </div>
+
+        <div class="mt-2">
+            <input class="btn btn-success" type="submit" value="Create"> |
+            <a class="btn btn-dark" href="/customer" role="button">Back</a>
+        </div>
+    </form>
+</div>
+
+<div th:replace="~{layout/layout :: library}"></div>
+</body>
+</html>
