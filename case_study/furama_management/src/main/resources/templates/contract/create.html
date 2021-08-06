@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/layout :: head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        input {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{layout/layout :: header}"></div>
+
+<div class="container-fluid mt-2">
+    <h2>ADD New Contract</h2>
+    <form th:object="${contractDto}" action="/contract/create" method="post">
+        <div>
+            <div class="form-group">
+                <label>Contract Start Date :</label>
+                <input class="form-control" type="date" aria-describedby="code" style="width: 80%"
+                       th:field="*{contractStartDate}">
+                <p class="text-danger" th:errors="*{contractStartDate}"></p>
+
+                <label>Contract End Date :</label>
+                <input class="form-control" type="date" aria-describedby="code" style="width: 80%"
+                       th:field="*{contractEndDate}">
+                <p class="text-danger" th:errors="*{contractEndDate}"></p>
+
+                <label class="mt-2">Deposite :</label>
+                <input class="form-control" type="number" style="width: 80%"
+                       th:field="*{contractDeposit}">
+                <p class="text-danger" th:errors="*{contractDeposit}"></p>
+
+                <label class="mt-2">Total Money :</label>
+                <input class="form-control" type="number" aria-describedby="idCard" style="width: 80%"
+                       th:field="*{contractTotalMoney}">
+                <p class="text-danger" th:errors="*{contractTotalMoney}"></p>
+
+                <label for="division" class="mt-2">Employee :</label>
+                <select class="form-control" id="division"
+                        th:field="*{employee}" style="width: 80%">
+                    <option th:each="employee : ${employeeList}"
+                            th:text="${employee.employeeName}"
+                            th:value="${employee.employeeId}"></option>
+                </select>
+
+                <label for="position" class="mt-2">Customer :</label>
+                <select class="form-control" id="position"
+                        th:field="*{customer}" style="width: 80%">
+                    <option th:each="customer : ${customerList}"
+                            th:text="${customer.customerName}"
+                            th:value="${customer.customerId}"></option>
+                </select>
+
+                <label for="service" class="mt-2">Service :</label>
+                <select class="form-control" id="service"
+                        th:field="*{service}" style="width: 80%">
+                    <option th:each="service : ${serviceList}"
+                            th:text="${service.serviceName}"
+                            th:value="${service.serviceId}"></option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="mt-2">
+            <input class="btn btn-success" type="submit" value="Create"> |
+            <a class="btn btn-dark" href="/contract" role="button">Back</a>
+        </div>
+    </form>
+</div>
+
+<div th:replace="~{layout/layout :: library}"></div>
+</body>
+</html>

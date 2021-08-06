@@ -30,7 +30,7 @@ public class Service {
     private Integer numberOfFloors;
 
     @ManyToOne(targetEntity = ServiceType.class)
-    @JoinColumn(name = "service_type_id", referencedColumnName = "serviceTypeName")
+    @JoinColumn(name = "service_type_id", referencedColumnName = "serviceTypeId")
     private ServiceType serviceType;
 
     @ManyToOne(targetEntity = RentType.class)

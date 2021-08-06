@@ -4,14 +4,18 @@ import com.codegym.model.entity.employee.Division;
 import com.codegym.model.entity.employee.EducationDegree;
 import com.codegym.model.entity.employee.Position;
 import com.codegym.model.entity.employee.User;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeDto {
     private Integer employeeId;
 
@@ -22,6 +26,8 @@ public class EmployeeDto {
     @Pattern(regexp = "[0-9]{9}|[0-9]{12}",
             message = "Số CMND phải đúng định dạng XXXXXXXXX hoặc XXXXXXXXXXXX (X là số 0-9)")
     private String employeeIdCard;
+
+    @Min(value = 0, message = "Vui lòng nhập số dương")
     private Double employeeSalary;
 
     @Pattern(regexp = "^(090|091|\\(84\\)\\+90|\\(84\\)\\+91)[0-9]{7}$",
@@ -34,6 +40,7 @@ public class EmployeeDto {
 
     @NotBlank
     private String employeeAddress;
+
     private Position position;
     private Division division;
     private EducationDegree educationDegree;

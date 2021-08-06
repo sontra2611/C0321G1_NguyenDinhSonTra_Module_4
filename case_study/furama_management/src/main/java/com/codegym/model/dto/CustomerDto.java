@@ -1,14 +1,17 @@
 package com.codegym.model.dto;
 
 import com.codegym.model.entity.customer.CustomerType;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerDto {
     private Integer customerId;
 

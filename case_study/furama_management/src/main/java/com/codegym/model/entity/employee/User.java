@@ -16,7 +16,7 @@ import java.util.Set;
 public class User {
     @Id
     private String userName;
-    private String passWork;
+    private String passWord;
 
     @OneToOne(mappedBy = "user")
     private Employee employee;

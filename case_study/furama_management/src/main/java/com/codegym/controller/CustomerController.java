@@ -1,4 +1,4 @@
-package com.codegym.controller.customer;
+package com.codegym.controller;
 
 import com.codegym.model.dto.CustomerDto;
 import com.codegym.model.entity.customer.Customer;
@@ -76,10 +76,7 @@ public class CustomerController {
     }
 
     @PostMapping("/edit")
-    public String edit(@Valid @ModelAttribute Optional<Customer> customerEdit, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
-
-        }
+    public String edit(@Valid @ModelAttribute Optional<Customer> customerEdit){
         iCustomerService.save(customerEdit.get());
         return "redirect:/customer";
     }

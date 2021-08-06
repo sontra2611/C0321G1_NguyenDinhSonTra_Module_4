@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public interface ICustomerService {
-    Page<Customer> findAll(Pageable pageable);
+    List<Customer> findAll();
 
     void save(Customer customer);
 

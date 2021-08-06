@@ -29,8 +29,8 @@ public class Contract {
     @Column(name = "contract_end_date", columnDefinition = "DATE")
     private String contractEndDate;
 
-    private Double contactDeposit;
-    private Double contactTotalMoney;
+    private Double contractDeposit;
+    private Double contractTotalMoney;
 
     @ManyToOne(targetEntity = Employee.class)
     @JoinColumn(name = "employee_id", referencedColumnName = "employeeId")

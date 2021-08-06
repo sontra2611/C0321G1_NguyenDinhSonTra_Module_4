@@ -1,0 +1,74 @@
+package com.codegym.controller;
+
+import com.codegym.model.dto.ContractDetailDto;
+import com.codegym.model.dto.ContractDto;
+import com.codegym.model.entity.contract.Contract;
+import com.codegym.model.entity.contract_detail.AttachService;
+import com.codegym.model.entity.contract_detail.ContractDetail;
+import com.codegym.model.service.contract.IContractService;
+import com.codegym.model.service.contract_detail.IContractDetailService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@Controller
+@RequestMapping("contractDetail")
+public class ContractDetailController {
+    @Autowired
+    IContractDetailService iContractDetailService;
+
+    @Autowired
+    IContractService iContractService;
+
+    @ModelAttribute("attachServiceList")
+    public List<AttachService> getAttachServiceList() {
+        return iContractDetailService.findAllAttachService();
+    }
+
+    @ModelAttribute("contractList")
+    public List<Contract> getContractList() {
+        return iContractService.findAll();
+    }
+
+    @GetMapping({""})
+    public String showList(@PageableDefault(value = 5) Pageable pageable, Model model){
+
+        Page<ContractDetail> contractDetailList = iContractDetailService.findAll(pageable);
+        model.addAttribute("contractDetailList", contractDetailList);
+        return "contract_detail/list";
+    }
+
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("contractDetailDto",new ContractDetailDto());
+        return "contract_detail/create";
+    }
+
+    @PostMapping("/create")
+    public String save(@Valid @ModelAttribute ContractDetailDto contractDetailDto,
+                       BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("contractDetailDto", contractDetailDto);
+            return "/contract_detail/create";
+        }
+
+        ContractDetail contractDetail = new ContractDetail();
+        BeanUtils.copyProperties(contractDetailDto, contractDetail);
+        iContractDetailService.save(contractDetail);
+        redirectAttributes.addFlashAttribute("message", "Added new contractDetail have successfully");
+        return "redirect:/contractDetail";
+    }
+}

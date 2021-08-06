@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/layout :: head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{layout/layout :: header}"></div>
+
+<div class="container-fluid mt-2">
+    <h2>ADD New Contract Detail</h2>
+    <form th:object="${contractDetailDto}" action="/contractDetail/create" method="post">
+        <div>
+            <div class="form-group">
+                <label>Quantity :</label>
+                <input class="form-control" type="number" aria-describedby="code" style="width: 80%"
+                       th:field="*{quantity}">
+                <p class="text-danger" th:errors="*{quantity}"></p>
+
+                <label for="contract" class="mt-2">Contract Id :</label>
+                <select class="form-control" id="contract"
+                        th:field="*{contract}" style="width: 80%">
+                    <option th:each="contract : ${contractList}"
+                            th:text="${contract.contractId}"
+                            th:value="${contract.contractId}"></option>
+                </select>
+
+                <label for="position" class="mt-2">AttachService :</label>
+                <select class="form-control" id="position"
+                        th:field="*{attachService}" style="width: 80%">
+                    <option th:each="attachService : ${attachServiceList}"
+                            th:text="${attachService.attachServiceName}"
+                            th:value="${attachService.attachServiceId}"></option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="mt-2">
+            <input class="btn btn-success" type="submit" value="Create"> |
+            <a class="btn btn-dark" href="/contractDetail" role="button">Back</a>
+        </div>
+    </form>
+</div>
+
+<div th:replace="~{layout/layout :: library}"></div>
+</body>
+</html>
