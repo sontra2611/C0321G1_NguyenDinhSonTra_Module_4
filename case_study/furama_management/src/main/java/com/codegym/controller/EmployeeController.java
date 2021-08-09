@@ -70,6 +70,8 @@ public class EmployeeController {
     @PostMapping("/create")
     public String save(@Valid @ModelAttribute EmployeeDto employeeDto,
                        BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
+
+        new EmployeeDto().validate(employeeDto, bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("employeeDto", employeeDto);
             return "/employee/create";
@@ -100,6 +102,9 @@ public class EmployeeController {
 
     @PostMapping("/edit")
     public String edit(@Valid @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
+
+        new EmployeeDto().validate(employeeDto, bindingResult);
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("employeeDto", employeeDto);
             return "/employee/edit";

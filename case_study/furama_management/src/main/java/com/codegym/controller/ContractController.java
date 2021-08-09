@@ -1,6 +1,7 @@
 package com.codegym.controller;
 
 import com.codegym.model.dto.ContractDto;
+import com.codegym.model.dto.CustomerDto;
 import com.codegym.model.dto.EmployeeDto;
 import com.codegym.model.entity.contract.Contract;
 import com.codegym.model.entity.customer.Customer;
@@ -11,6 +12,7 @@ import com.codegym.model.service.contract.IContractService;
 import com.codegym.model.service.customer.ICustomerService;
 import com.codegym.model.service.employee.IEmployeeService;
 import com.codegym.model.service.service.IServiceService;
+import javafx.scene.control.Control;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -73,6 +75,7 @@ public class ContractController {
     @PostMapping("/create")
     public String save(@Valid @ModelAttribute ContractDto contractDto,
                        BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
+        new ContractDto().validate(contractDto, bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("contractDto", contractDto);
             return "/contract/create";
@@ -88,6 +91,29 @@ public class ContractController {
     @PostMapping("/delete")
     public String delete(@RequestParam Optional<Integer> id){
         iContractService.removeById(id.get());
+        return "redirect:/contract";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable Optional<Integer> id, Model model) {
+        Contract contract = iContractService.findById(id.get());
+        ContractDto contractDto = new ContractDto();
+        BeanUtils.copyProperties(contract, contractDto);
+        model.addAttribute("contractDto", contractDto);
+        return "/contract/edit";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@Valid @ModelAttribute ContractDto contractDto, BindingResult bindingResult, Model model) {
+        new ContractDto().validate(contractDto, bindingResult);
+        if (bindingResult.hasErrors()){
+            model.addAttribute("contractDto", contractDto);
+            return "/contract/edit";
+        }
+
+        Contract contract = new Contract();
+        BeanUtils.copyProperties(contractDto, contract);
+        iContractService.save(contract);
         return "redirect:/contract";
     }
 }

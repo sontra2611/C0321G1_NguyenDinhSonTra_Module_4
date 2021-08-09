@@ -1,5 +1,6 @@
 package com.codegym.model.service.contract_detail;
 
+import com.codegym.model.dto.IContractDetailOtherDto;
 import com.codegym.model.entity.contract_detail.AttachService;
 import com.codegym.model.entity.contract_detail.ContractDetail;
 import com.codegym.model.repository.contrac_detail.IAttachServiceRepository;
@@ -42,5 +43,15 @@ public class ContractDetailService implements IContractDetailService {
     @Override
     public List<AttachService> findAllAttachService() {
         return iAttachServiceRepository.findAll();
+    }
+
+    @Override
+    public List<ContractDetail> findAllByContract_ContractId(Integer id) {
+        return iContracDetailRepository.findAllByContract_ContractId(id);
+    }
+
+    @Override
+    public List<IContractDetailOtherDto> findAllByContractDetailByAttachService() {
+        return iContracDetailRepository.findAllByContractDetailByAttachService();
     }
 }

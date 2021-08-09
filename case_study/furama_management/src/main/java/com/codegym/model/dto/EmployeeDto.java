@@ -3,20 +3,24 @@ package com.codegym.model.dto;
 import com.codegym.model.entity.employee.Division;
 import com.codegym.model.entity.employee.EducationDegree;
 import com.codegym.model.entity.employee.Position;
-import com.codegym.model.entity.employee.User;
+import com.codegym.model.entity.user.User;
 import lombok.*;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeDto {
+public class EmployeeDto implements Validator {
     private Integer employeeId;
 
     @NotBlank
@@ -45,4 +49,27 @@ public class EmployeeDto {
     private Division division;
     private EducationDegree educationDegree;
     private User user;
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        EmployeeDto employeeDto = (EmployeeDto) target;
+
+        java.sql.Date dateNow = new java.sql.Date(System.currentTimeMillis());
+
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(employeeDto.getEmployeeBirthday());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (date.after(dateNow)) {
+            errors.rejectValue("employeeBirthday", "day.noFuture");
+        }
+    }
 }

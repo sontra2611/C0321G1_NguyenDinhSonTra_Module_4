@@ -1,5 +1,6 @@
-package com.codegym.model.entity.employee;
+package com.codegym.model.entity.user;
 
+import com.codegym.model.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Role {
     private Integer roleId;
     private String roleName;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany
     private Set<User> users;
+
 }

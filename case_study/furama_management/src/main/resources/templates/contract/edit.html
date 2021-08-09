@@ -8,10 +8,13 @@
 <div th:replace="~{layout/layout :: header}"></div>
 
 <div class="container mt-2">
-    <h2 class="text-center">ADD New Contract</h2>
-    <form th:object="${contractDto}" action="/contract/create" method="post">
+    <h2 class="text-center">Edit Contract</h2>
+    <form th:object="${contractDto}" action="/contract/edit" method="post">
         <div>
             <div class="form-group">
+
+                <input type="hidden" th:field="*{contractId}">
+
                 <label>Contract Start Date :</label>
                 <input class="form-control" type="date" aria-describedby="code"
                        th:field="*{contractStartDate}">
@@ -60,7 +63,7 @@
         </div>
 
         <div class="mt-2">
-            <input class="btn btn-success" type="submit" value="Create"> |
+            <input class="btn btn-success" type="submit" value="Edit"> |
             <a class="btn btn-dark" href="/contract" role="button">Back</a>
         </div>
     </form>

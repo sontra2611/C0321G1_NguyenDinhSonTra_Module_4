@@ -35,4 +35,7 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<Contract> contractList;
+
+    private boolean flag;
+
 }

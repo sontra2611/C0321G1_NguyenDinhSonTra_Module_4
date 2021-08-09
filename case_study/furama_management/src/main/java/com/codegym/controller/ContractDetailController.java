@@ -15,14 +15,12 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("contractDetail")
@@ -69,6 +67,34 @@ public class ContractDetailController {
         BeanUtils.copyProperties(contractDetailDto, contractDetail);
         iContractDetailService.save(contractDetail);
         redirectAttributes.addFlashAttribute("message", "Added new contractDetail have successfully");
+        return "redirect:/contractDetail";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable Optional<Integer> id, Model model) {
+        ContractDetail contractDetail = iContractDetailService.findById(id.get());
+        ContractDetailDto contractDetailDto = new ContractDetailDto();
+        BeanUtils.copyProperties(contractDetail, contractDetailDto);
+        model.addAttribute("contractDetailDto", contractDetailDto);
+        return "/contract_detail/edit";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@Valid @ModelAttribute ContractDetailDto contractDetailDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()){
+            model.addAttribute("contractDetailDto", contractDetailDto);
+            return "/contract_detail/edit";
+        }
+
+        ContractDetail contractDetail = new ContractDetail();
+        BeanUtils.copyProperties(contractDetailDto, contractDetail);
+        iContractDetailService.save(contractDetail);
+        return "redirect:/contractDetail";
+    }
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam Optional<Integer> id){
+        iContractDetailService.removeById(id.get());
         return "redirect:/contractDetail";
     }
 }

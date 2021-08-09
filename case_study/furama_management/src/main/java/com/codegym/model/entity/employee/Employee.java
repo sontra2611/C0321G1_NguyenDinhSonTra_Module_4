@@ -1,6 +1,7 @@
 package com.codegym.model.entity.employee;
 
 import com.codegym.model.entity.contract.Contract;
+import com.codegym.model.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -37,21 +37,21 @@
     </nav>
 
     <div class="container-fluid ">
-        <div class="text-primary" th:text="${message}"></div>
-        <table id="tableCustomer" class="table table-bordered table-striped table-responsive">
+        <div class="text-danger" th:text="${message}"></div>
+        <table id="tableCustomer" class="table table-bordered table-striped table-responsive mw-100">
             <thead>
             <tr>
                 <th class="align-middle">No</th>
                 <th class="align-middle">Id</th>
-                <th class="align-middle">Customer Code</th>
-                <th class="align-middle">Customer Name</th>
-                <th class="align-middle">Customer Birthday</th>
-                <th class="align-middle">Customer gender</th>
-                <th class="align-middle">Customer Id Card</th>
-                <th class="align-middle">Customer Phone</th>
-                <th class="align-middle">Customer Email</th>
-                <th class="align-middle">Customer Address</th>
-                <th class="align-middle">Customer Type</th>
+                <th class="align-middle">Code</th>
+                <th class="align-middle">Name</th>
+                <th class="align-middle">Birthday</th>
+                <th class="align-middle">gender</th>
+                <th class="align-middle">Id Card</th>
+                <th class="align-middle">Phone</th>
+                <th class="align-middle">Email</th>
+                <th class="align-middle">Address</th>
+                <th class="align-middle">Type</th>
                 <th class="align-middle text-center">Delete</th>
                 <th class="align-middle text-center">Edit</th>
             </tr>
@@ -179,10 +179,6 @@
                th:if="${customerList.hasPrevious()}">Previous</a>
             <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>
             <a th:href="@{'/customer'(page=${customerList.number + 1}, name=${name})}" th:if="${customerList.hasNext()}">Next</a>
-        </div>
-
-        <div class="text-center">
-            <a href="/customer?action=customerUseService">Show list Custormer User Service >></a>
         </div>
     </div>
 </div>

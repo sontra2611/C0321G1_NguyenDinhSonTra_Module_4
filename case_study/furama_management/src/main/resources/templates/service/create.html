@@ -7,59 +7,59 @@
 <body>
 <div th:replace="~{layout/layout :: header}"></div>
 
-<div class="container-fluid mt-2">
-    <h2>ADD New Service</h2>
+<div class="container mt-2">
+    <h2 class="text-center">ADD New Service</h2>
     <form th:object="${serviceDto}" action="/service/create" method="post">
         <div>
             <div class="form-group">
                 <label>Service Code :</label>
-                <input class="form-control" type="text" aria-describedby="code" style="width: 80%"
+                <input class="form-control" type="text" aria-describedby="code"
                        th:field="*{serviceCode}">
                 <p class="text-danger" th:errors="*{serviceCode}"></p>
 
                 <label>Name :</label>
-                <input class="form-control" type="text" aria-describedby="code" style="width: 80%"
+                <input class="form-control" type="text" aria-describedby="code"
                        th:field="*{serviceName}">
                 <p class="text-danger" th:errors="*{serviceName}"></p>
 
                 <label class="mt-2">Area :</label>
-                <input class="form-control" type="text" style="width: 80%"
+                <input class="form-control" type="text"
                        th:field="*{serviceArea}">
                 <p class="text-danger" th:errors="*{serviceArea}"></p>
 
                 <label class="mt-2">Cost :</label>
-                <input class="form-control" type="text" aria-describedby="idCard" style="width: 80%"
+                <input class="form-control" type="text" aria-describedby="idCard"
                        th:field="*{serviceCost}">
                 <p class="text-danger" th:errors="*{serviceCost}"></p>
 
                 <label class="mt-2">Maxpeople :</label>
-                <input class="form-control" type="text" aria-describedby="idCard" style="width: 80%"
+                <input class="form-control" type="text" aria-describedby="idCard"
                        th:field="*{serviceMaxPeople}">
                 <p class="text-danger" th:errors="*{serviceMaxPeople}"></p>
 
                 <label class="mt-2">Standard Room :</label>
-                <input class="form-control" type="text" aria-describedby="phone" style="width: 80%"
+                <input class="form-control" type="text" aria-describedby="phone"
                        th:field="*{standardRoom}">
                 <p class="text-danger" th:errors="*{standardRoom}"></p>
 
                 <label class="mt-2">Desciption :</label>
-                <input class="form-control" type="text" aria-describedby="email" style="width: 80%"
+                <input class="form-control" type="text" aria-describedby="email"
                        th:field="*{desciption}">
                 <p class="text-danger" th:errors="*{desciption}"></p>
 
                 <label class="mt-2">Pool Area :</label>
-                <input class="form-control" type="text" style="width: 80%"
+                <input class="form-control" type="text"
                        th:field="*{poolArea}">
                 <p class="text-danger" th:errors="*{poolArea}"></p>
 
                 <label class="mt-2">Number Of Floors :</label>
-                <input class="form-control" type="text" style="width: 80%"
+                <input class="form-control" type="text"
                        th:field="*{numberOfFloors}">
                 <p class="text-danger" th:errors="*{numberOfFloors}"></p>
 
                 <label for="division" class="mt-2">Service Type :</label>
                 <select class="form-control" id="division"
-                        th:field="*{serviceType}" style="width: 80%">
+                        th:field="*{serviceType}">
                     <option th:each="serviceType : ${serviceTypeList}"
                             th:text="${serviceType.serviceTypeName}"
                             th:value="${serviceType.serviceTypeId}"></option>
@@ -67,7 +67,7 @@
 
                 <label for="position" class="mt-2">Rent Type :</label>
                 <select class="form-control" id="position"
-                        th:field="*{rentType}" style="width: 80%">
+                        th:field="*{rentType}">
                     <option th:each="rentType : ${rentTypeList}"
                             th:text="${rentType.rentTypeName}"
                             th:value="${rentType.rentTypeId}"></option>

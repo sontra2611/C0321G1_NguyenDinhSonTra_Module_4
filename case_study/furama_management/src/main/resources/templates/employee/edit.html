@@ -7,69 +7,70 @@
 <body>
 <div th:replace="~{layout/layout :: header}"></div>
 
-<div class="container-fluid mt-2">
-    <h2>Edit Employee</h2>
+<div class="container mt-2">
+    <h2 class="text-center">Edit Employee</h2>
     <form th:object="${employeeDto}" action="/employee/edit" method="post">
         <div>
             <div class="form-group">
                 <input type="hidden" th:field="*{employeeId}">
 
                 <label>Name :</label>
-                <input class="form-control" type="text" aria-describedby="code" style="width: 80%"
+                <input class="form-control" type="text" aria-describedby="code"
                        th:field="*{employeeName}">
                 <p class="text-danger" th:errors="*{employeeName}"></p>
 
                 <label class="mt-2">Birthday :</label>
-                <input class="form-control" type="date" style="width: 80%"
+                <input class="form-control" type="date"
                        th:field="*{employeeBirthday}">
+                <p class="text-danger" th:errors="*{employeeBirthday}"></p>
 
                 <label class="mt-2">Id Card :</label>
-                <input class="form-control" type="text" aria-describedby="idCard" style="width: 80%"
+                <input class="form-control" type="text" aria-describedby="idCard"
                        th:field="*{employeeIdCard}">
                 <p class="text-danger" th:errors="*{employeeIdCard}"></p>
 
                 <label class="mt-2">Salary :</label>
-                <input class="form-control" type="text" aria-describedby="idCard" style="width: 80%"
+                <input class="form-control" type="text" aria-describedby="idCard"
                        th:field="*{employeeSalary}">
                 <p class="text-danger" th:errors="*{employeeSalary}"></p>
 
                 <label class="mt-2">Phone :</label>
-                <input class="form-control" type="text" aria-describedby="phone" style="width: 80%"
+                <input class="form-control" type="text" aria-describedby="phone"
                        th:field="*{employeePhone}">
                 <p class="text-danger" th:errors="*{employeePhone}"></p>
 
                 <label class="mt-2">Email :</label>
-                <input class="form-control" type="text" aria-describedby="email" style="width: 80%"
+                <input class="form-control" type="text" aria-describedby="email"
                        th:field="*{employeeEmail}">
                 <p class="text-danger" th:errors="*{employeeEmail}"></p>
 
                 <label class="mt-2">Address :</label>
-                <input class="form-control" type="text" style="width: 80%" th:field="*{employeeAddress}">
+                <input class="form-control" type="text" th:field="*{employeeAddress}">
                 <p class="text-danger" th:errors="*{employeeAddress}"></p>
 
                 <label for="division" class="mt-2">Division :</label>
-                <select class="form-control" id="division" th:field="*{division}" style="width: 80%">
+                <select class="form-control" id="division" th:field="*{division}">
                     <option th:each="division : ${divisionList}"
                             th:text="${division.divisionName}"
                             th:value="${division.divisionId}"></option>
                 </select>
 
                 <label for="position" class="mt-2">Position :</label>
-                <select class="form-control" id="position" th:field="*{position}" style="width: 80%">
+                <select class="form-control" id="position" th:field="*{position}">
                     <option th:each="position : ${positionList}"
                             th:text="${position.positionName}"
                             th:value="${position.positionId}"></option>
                 </select>
 
                 <label for="education" class="mt-2">Education Degree :</label>
-                <select class="form-control" id="education" th:field="*{educationDegree}" style="width: 80%">
+                <select class="form-control" id="education" th:field="*{educationDegree}">
                     <option th:each="educationDegree : ${educationDegreeList}"
                             th:text="${educationDegree.educationName}"
                             th:value="${educationDegree.educationDegreeId}"></option>
                 </select>
 
                 <label class="mt-2">User :</label>
-                <input class="form-control" type="text" style="width: 80%" th:field="*{user.userName}">
+                <input class="form-control" type="text" th:field="*{user.userName}">
             </div>
         </div>
 

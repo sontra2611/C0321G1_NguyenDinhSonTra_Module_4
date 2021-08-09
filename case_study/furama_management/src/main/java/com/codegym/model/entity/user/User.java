@@ -1,5 +1,6 @@
-package com.codegym.model.entity.employee;
+package com.codegym.model.entity.user;
 
+import com.codegym.model.entity.employee.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Employee employee;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_name"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
