@@ -24,15 +24,24 @@
                        th:field="*{serviceName}">
                 <p class="text-danger" th:errors="*{serviceName}"></p>
 
-
-                <label class="mt-2">Area :</label>
-                <input class="form-control" type="text" aria-describedby="idCard"
-                       th:field="*{serviceArea}">
+                <label for="area" class="mt-2">Area :</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="area"
+                           th:field="*{serviceArea}">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">m2</span>
+                    </div>
+                </div>
                 <p class="text-danger" th:errors="*{serviceArea}"></p>
 
-                <label class="mt-2">Cost :</label>
-                <input class="form-control" type="text" aria-describedby="idCard"
-                       th:field="*{serviceCost}">
+                <label for="cost" class="mt-2">Cost :</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="cost"
+                           th:field="*{serviceCost}">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">VND</span>
+                    </div>
+                </div>
                 <p class="text-danger" th:errors="*{serviceCost}"></p>
 
                 <label class="mt-2">Max people :</label>
@@ -50,9 +59,14 @@
                        th:field="*{desciption}">
                 <p class="text-danger" th:errors="*{desciption}"></p>
 
-                <label class="mt-2">Pool Area :</label>
-                <input class="form-control" type="text"
-                       th:field="*{poolArea}">
+                <label for="pool-area" class="mt-2">Pool Area : :</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="pool-area"
+                           th:field="*{poolArea}">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">m2</span>
+                    </div>
+                </div>
                 <p class="text-danger" th:errors="*{poolArea}"></p>
 
                 <label class="mt-2">Number Of Floor :</label>

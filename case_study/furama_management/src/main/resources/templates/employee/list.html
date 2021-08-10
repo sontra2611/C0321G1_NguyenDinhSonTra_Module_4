@@ -39,22 +39,18 @@
     </nav>
 
     <div class="container-fluid ">
-        <div class="text-danger" th:text="${message}"></div>
-        <table id="tableCustomer" class="table table-bordered table-striped table-responsive">
+        <h4 class="text-danger" th:text="${message}"></h4>
+        <table id="tableCustomer" class="table table-bordered table-striped">
             <thead>
             <tr>
                 <th class="align-middle">No</th>
-                <th class="align-middle">Id</th>
                 <th class="align-middle">Name</th>
                 <th class="align-middle">Birthday</th>
                 <th class="align-middle">Id Card</th>
-                <th class="align-middle">Salary</th>
-                <th class="align-middle">Phone</th>
                 <th class="align-middle">Address</th>
                 <th class="align-middle">Position</th>
                 <th class="align-middle">Division</th>
                 <th class="align-middle">Education</th>
-                <th class="align-middle">User name</th>
                 <th class="align-middle text-center">Delete</th>
                 <th class="align-middle text-center">Edit</th>
             </tr>
@@ -63,17 +59,13 @@
             <tbody>
             <tr th:each="employee,index : ${employeeList}">
                 <td th:text="${index.count}"></td>
-                <td th:text="${employee.employeeId}"></td>
                 <td th:text="${employee.employeeName}"></td>
                 <td th:text="${employee.employeeBirthday}"></td>
                 <td th:text="${employee.employeeIdCard}"></td>
-                <td th:text="${employee.employeeSalary}"></td>
-                <td th:text="${employee.employeePhone}"></td>
                 <td th:text="${employee.employeeAddress}"></td>
                 <td th:text="${employee.position.positionName}"></td>
                 <td th:text="${employee.division.divisionName}"></td>
                 <td th:text="${employee.educationDegree.educationName}"></td>
-                <td th:text="${employee.user.userName}"></td>
 
                 <td class="align-middle">
                     <button th:onclick="|onDelete(${employee.employeeId})|" type="button" class="btn btn-danger"
@@ -89,12 +81,14 @@
         </table>
 
         <div>
-            <a th:href="@{'/employee'(page=${employeeList.number - 1}, name=${name})}"
+            <a class="btn border-success" role="button" th:href="@{'/employee'(page=${employeeList.number - 1}, name=${name})}"
                th:if="${employeeList.hasPrevious()}">Previous</a>
 
-            <span th:text="${employeeList.number + 1}"></span>/<span th:text="${employeeList.totalPages}"></span>
+            <span class="btn border-success" role="button" th:text="${employeeList.number + 1}"></span>
+            <span class="btn border-success" role="button">of</span>
+            <span class="btn border-success" role="button" th:text="${employeeList.totalPages}"></span>
 
-            <a th:href="@{'/employee'(page=${employeeList.number + 1}, name=${name})}"
+            <a class="btn border-success" role="button" th:href="@{'/employee'(page=${employeeList.number + 1}, name=${name})}"
                th:if="${employeeList.hasNext()}">Next</a>
         </div>
     </div>

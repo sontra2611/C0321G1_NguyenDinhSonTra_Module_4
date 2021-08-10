@@ -37,7 +37,7 @@
     </nav>
 
     <div class="container-fluid ">
-        <div class="text-danger" th:text="${message}"></div>
+        <h4 class="text-danger" th:text="${message}"></h4>
         <table id="tableCustomer" class="table table-bordered table-striped table-responsive mw-100">
             <thead>
             <tr>
@@ -175,10 +175,14 @@
         </table>
 
         <div>
-            <a th:href="@{'/customer'(page=${customerList.number - 1}, name=${name})}"
-               th:if="${customerList.hasPrevious()}">Previous</a>
-            <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>
-            <a th:href="@{'/customer'(page=${customerList.number + 1}, name=${name})}" th:if="${customerList.hasNext()}">Next</a>
+            <a class="btn border-success" th:href="@{'/customer'(page=${customerList.number - 1}, name=${name})}"
+               th:if="${customerList.hasPrevious()}" role="button">Previous</a>
+
+            <span class="btn border-success" role="button" th:text="${customerList.number + 1}"></span>
+            <span  class="btn border-success" role="button">of</span>
+            <span class="btn border-success" role="button"  th:text="${customerList.totalPages}"></span>
+
+            <a class="btn border-success" th:href="@{'/customer'(page=${customerList.number + 1}, name=${name})}" th:if="${customerList.hasNext()}" role="button">Next</a>
         </div>
     </div>
 </div>

@@ -18,8 +18,8 @@
     </nav>
 
     <div class="container-fluid ">
-        <div class="text-danger" th:text="${message}"></div>
-        <table id="tableCustomer" class="table table-bordered table-striped table-responsive">
+        <h4 class="text-danger" th:text="${message}"></h4>
+        <table id="tableCustomer" class="table table-bordered table-striped">
             <thead>
             <tr>
                 <th class="align-middle">No</th>
@@ -30,8 +30,6 @@
                 <th class="align-middle">Quantity</th>
                 <th class="align-middle">Attach Service Name</th>
                 <th class="align-middle">Attach Service Cost</th>
-                <th class="align-middle">Attach Service Unit</th>
-                <th class="align-middle">Attach Service Status</th>
                 <th class="align-middle text-center">Delete</th>
                 <th class="align-middle text-center">Edit</th>
             </tr>
@@ -47,8 +45,6 @@
                 <td th:text="${contractDetail.quantity}"></td>
                 <td th:text="${contractDetail.attachService.attachServiceName}"></td>
                 <td th:text="${contractDetail.attachService.attachServiceCost}"></td>
-                <td th:text="${contractDetail.attachService.attachServiceUnit}"></td>
-                <td th:text="${contractDetail.attachService.attachServiceStatus}"></td>
 
                 <td class="align-middle">
                     <button th:onclick="|onDelete(${contractDetail.contractDetailId})|" type="button" class="btn btn-danger"
@@ -67,12 +63,14 @@
         </table>
 
         <div>
-            <a th:href="@{'/contractDetail'(page=${contractDetailList.number - 1})}"
+            <a class="btn border-success" role="button" th:href="@{'/contractDetail'(page=${contractDetailList.number - 1})}"
                th:if="${contractDetailList.hasPrevious()}">Previous</a>
 
-            <span th:text="${contractDetailList.number + 1}"></span>/<span th:text="${contractDetailList.totalPages}"></span>
+            <span class="btn border-success" role="button" th:text="${contractDetailList.number + 1}"></span>
+            <span class="btn border-success" role="button">of</span>
+            <span class="btn border-success" role="button" th:text="${contractDetailList.totalPages}"></span>
 
-            <a th:href="@{'/contractDetail'(page=${contractDetailList.number + 1})}"
+            <a class="btn border-success" role="button" th:href="@{'/contractDetail'(page=${contractDetailList.number + 1})}"
                th:if="${contractDetailList.hasNext()}">Next</a>
         </div>
     </div>

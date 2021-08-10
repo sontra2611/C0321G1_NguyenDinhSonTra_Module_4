@@ -29,9 +29,14 @@
                        th:field="*{employeeIdCard}">
                 <p class="text-danger" th:errors="*{employeeIdCard}"></p>
 
-                <label class="mt-2">Salary :</label>
-                <input class="form-control" type="text" aria-describedby="idCard"
-                       th:field="*{employeeSalary}">
+                <label for="salary" class="mt-2">Salary :</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="salary"
+                           th:field="*{employeeSalary}">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">VND</span>
+                    </div>
+                </div>
                 <p class="text-danger" th:errors="*{employeeSalary}"></p>
 
                 <label class="mt-2">Phone :</label>

@@ -49,7 +49,6 @@
                 <th class="align-middle">Contract End Day</th>
                 <th class="align-middle">Attach Service</th>
                 <th class="align-middle">Total Money</th>
-
             </tr>
             </thead>
 
@@ -86,48 +85,20 @@
         </table>
 
         <div>
-            <a th:href="@{'/customer/customerUseService'(page=${contractList.number - 1}, name=${name})}"
+            <a class="btn border-success" role="button" th:href="@{'/customer/customerUseService'(page=${contractList.number - 1}, name=${name})}"
                th:if="${contractList.hasPrevious()}">Previous</a>
 
-            <span th:text="${contractList.number + 1}"></span>/<span th:text="${contractList.totalPages}"></span>
+            <span class="btn border-success" role="button" th:text="${contractList.number + 1}"></span>
+            <span class="btn border-success">of</span>
+            <span class="btn border-success" th:text="${contractList.totalPages}"></span>
 
-            <a th:href="@{'/customer/customerUseService'(page=${contractList.number + 1}, name=${name})}"
+            <a class="btn border-success" role="button" th:href="@{'/customer/customerUseService'(page=${contractList.number + 1}, name=${name})}"
                th:if="${contractList.hasNext()}">Next</a>
         </div>
     </div>
 </div>
 
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
-<!--     aria-hidden="true">-->
-<!--    <div class="modal-dialog" role="document">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>-->
-<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                    <span aria-hidden="true">&times;</span>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--            <form action="/service/delete" method="post">-->
-<!--                <input type="hidden" name="id" value="" id="isServiceDel">-->
-<!--                <div class="modal-body">-->
-<!--                    Are you sure delete ?-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--                    <button type="submit" class="btn btn-danger">Delete</button>-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
 <div th:replace="~{layout/layout :: library}"></div>
-
-<!--<script>-->
-<!--    function onDelete(id) {-->
-<!--        document.getElementById("isServiceDel").value = id;-->
-<!--    }-->
-<!--</script>-->
 
 </body>
 </html>

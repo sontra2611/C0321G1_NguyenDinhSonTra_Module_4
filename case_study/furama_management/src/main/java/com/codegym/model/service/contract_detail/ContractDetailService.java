@@ -52,6 +52,6 @@ public class ContractDetailService implements IContractDetailService {
 
     @Override
     public List<IContractDetailOtherDto> findAllByContractDetailByAttachService() {
-        return iContracDetailRepository.findAllByContractDetailByAttachService();
+        return iContracDetailRepository.findAllByContractDetailOther();
     }
 }

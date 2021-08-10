@@ -11,6 +11,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.Year;
 import java.util.Date;
 
 @Getter
@@ -58,17 +61,14 @@ public class CustomerDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         CustomerDto customerDto = (CustomerDto) target;
-        java.sql.Date dateNow = new java.sql.Date(System.currentTimeMillis());
 
-        Date date = null;
-        try {
-            date = new SimpleDateFormat("yyyy-MM-dd").parse(customerDto.getCustomerBirthday());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        if (date.after(dateNow)) {
-            errors.rejectValue("customerBirthday", "day.noFuture");
+        if (customerDto.getCustomerBirthday().equals("")) {
+            errors.rejectValue("customerBirthday", "", "Vui lòng không để trống");
+        } else {
+            int age = Period.between(LocalDate.parse(customerDto.getCustomerBirthday()), LocalDate.now()).getYears();
+            if (age < 18) {
+                errors.rejectValue("customerBirthday", "", "Tuổi của bạn phải >= 18");
+            }
         }
     }
 }

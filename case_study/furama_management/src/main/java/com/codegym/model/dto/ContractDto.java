@@ -70,5 +70,9 @@ public class ContractDto implements Validator {
         if (enddate.before(startDate)) {
             errors.rejectValue("contractEndDate", "day.noPast");
         }
+
+        if (contractDto.getContractDeposit() > contractDto.getContractTotalMoney()) {
+            errors.rejectValue("contractEndDate", "", "Tiền đặt cọc phải nhỏ hơn tổng tiền");
+        }
     }
 }

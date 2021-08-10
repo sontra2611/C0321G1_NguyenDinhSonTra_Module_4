@@ -75,6 +75,15 @@ public class ContractController {
     @PostMapping("/create")
     public String save(@Valid @ModelAttribute ContractDto contractDto,
                        BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
+
+        List<Service> serviceList = iServiceService.findAll();
+
+        for (Service service : serviceList) {
+            if (contractDto.getService().getServiceName().equals(service.getServiceName())) {
+                contractDto.setContractTotalMoney(service.getServiceCost());
+            }
+        }
+
         new ContractDto().validate(contractDto, bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("contractDto", contractDto);

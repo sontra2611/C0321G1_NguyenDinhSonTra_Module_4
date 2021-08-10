@@ -106,10 +106,11 @@ public class CustomerController {
         if (name.isPresent()){
             nameValue = name.get();
         }
+
         Page<Contract> contractList = iContractService.findAllCustomerUseService(pageable, nameValue);
         for (Contract contract : contractList) {
             List<ContractDetail> contractDetailList = iContractDetailService.findAllByContract_ContractId(contract.getContractId());
-            Double totalMoney = contract.getService().getServiceCost() - contract.getContractDeposit();
+            Double totalMoney = contract.getContractTotalMoney() - contract.getContractDeposit();
 
             for (ContractDetail contractDetail : contractDetailList) {
                 totalMoney += contractDetail.getAttachService().getAttachServiceCost() * contractDetail.getQuantity();
